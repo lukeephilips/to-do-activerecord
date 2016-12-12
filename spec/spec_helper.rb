@@ -7,11 +7,10 @@ require('pg')
 require('task')
 require('list')
 
-
-
-# RSpec.configure do |config|
-#   config.after(:each) do
-#     DB.exec('DELETE FROM stylists *;')
-#     DB.exec('DELETE FROM clients *;')
-#   end
-# end
+RSpec.configure do |config|
+  config.after(:each) do
+    Task.all().each() do |task|
+      task.destroy()
+    end
+  end
+end
