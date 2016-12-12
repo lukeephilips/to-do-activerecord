@@ -1,9 +1,17 @@
 <h1>To Do</h1>
 
-<p>Here are all your tasks:</p>
-
+<% if @lists == [] %>
+  <p>You have not created a list yet</p>
+<% else %>
+  <p> Here are your lists. Click list to edit tasks: </p>
 <ul>
-  <% @tasks.not_done().each do |task| %>
-    <li><%= task.description %></li>
+  <% @lists.each do |list| %>
+    <li><a href="/list/<%= list.id %>"><%= list.name %></a></li>
   <% end %>
 </ul>
+<% end %>
+
+<form action="/list" method="post">
+  <input type="text" name="name" id="name" placeholder="enter a list name">
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
